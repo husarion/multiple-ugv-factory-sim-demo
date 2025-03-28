@@ -1,6 +1,8 @@
 # multiple-ugv-factory-sim-demo
 Simulation of the Multiple Husarion Panther UGV Platforms in an Automated Factory Application
 
+![world](.docs/world.png)
+![robots](.docs/robots.png)
 
 # Running
 
