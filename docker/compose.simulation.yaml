@@ -1,0 +1,48 @@
+x-common-config: &common-config
+  network_mode: host
+  ipc: host
+  environment:
+    - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    - ROBOT_MODEL_NAME=${ROBOT_MODEL_NAME:-panther}
+    - ROBOT_NAMESPACE=${ROBOT_NAMESPACE:-panther}
+    - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
+
+x-gpu-config: &gpu-config
+  runtime: nvidia
+  env_file: .env.gpu
+
+services:
+  simulation:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+      - ../husarion_ugv_pick_and_place_demo/config:/config
+
+    <<:
+      - *common-config
+      - *gpu-config
+    devices:
+      - /dev/dri:/dev/dri
+      # ign gazebo -v 6 /ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/worlds/industrial-warehouse_with_outside.sdf
+    command: >
+      ros2 launch husarion_ugv_pick_and_place_demo pick_and_place_demo.launch.py
+
+  rviz:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+    <<:
+      - *common-config
+      - *gpu-config
+    devices:
+      - /dev/dri:/dev/dri
+      # ign gazebo -v 6 /ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/worlds/industrial-warehouse_with_outside.sdf
+    command: >
+      rviz2 -d /ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/config/pick_and_place.rviz
+        --ros-args -r initialpose:=/panther/initialpose -r goal_pose:=/panther/goal_pose
