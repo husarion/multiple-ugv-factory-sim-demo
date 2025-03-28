@@ -377,9 +377,9 @@ amcl:
     set_initial_pose: true
     always_reset_initial_pose: true
     initial_pose:
-      x: -8.0
-      y: 8.75
-      yaw: 3.14
+      x: 0.0
+      y: 0.0
+      yaw: 0.0
 
     tf_broadcast: true
     transform_tolerance: 1.0

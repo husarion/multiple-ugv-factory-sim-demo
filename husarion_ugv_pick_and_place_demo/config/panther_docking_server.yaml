@@ -29,7 +29,7 @@
       type: charging_dock
       frame: <robot_namespace>/map
       dock_frame: main_wibotic_transmitter_link
-      pose: [-8.4, 8.75, 3.14] # [x, y, yaw] of the dock on the map.
+      pose: [0.1, 0.0, 0.0] # [x, y, yaw] of the dock on the map.
       gazebo_spawn_pose: [-6.65, 8.75, 1.57] # [x, y, yaw] of the dock on the gazebo world.
       apriltag_id: 0
 
@@ -37,7 +37,7 @@
       type: charging_dock
       frame: <robot_namespace>/map
       dock_frame: backup_wibotic_transmitter_link
-      pose: [-8.5, 9.75, 3.14] # [x, y, yaw] of the dock on the map.
+      pose: [0.1, -1.0, 0.0] # [x, y, yaw] of the dock on the map.
       gazebo_spawn_pose: [-6.65, 9.75, 1.57] # [x, y, yaw] of the dock on the gazebo world.
       apriltag_id: 1
 
