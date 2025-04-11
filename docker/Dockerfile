@@ -1,6 +1,6 @@
 ARG ROS_DISTRO=humble
 
-FROM husarion/husarion-ugv-gazebo:humble-humble-update-components-fix-zed
+FROM husarion/husarion-ugv-gazebo:humble-2.2.1-20250331
 ARG BUILD_TEST=OFF
 
 ENV HUSARION_ROS_BUILD_TYPE=simulation
@@ -12,7 +12,7 @@ COPY . src/husarion_ugv_pick_and_place_demo
 
 RUN apt-get update  && \
     apt-get install -y \
-        ros-dev-tools && \
+        ros-dev-tools ros-humble-effort-controllers ros-humble-position-controllers ros-humble-gripper-controllers && \
     # Install dependencies
     # rosdep init && \
     rosdep update --rosdistro $ROS_DISTRO && \

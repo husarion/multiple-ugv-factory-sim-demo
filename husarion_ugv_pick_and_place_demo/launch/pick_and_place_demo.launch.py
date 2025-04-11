@@ -157,8 +157,8 @@ def generate_launch_description():
         # Sets use_sim_time for all nodes started below (doesn't work for nodes started from ignition gazebo)
         SetUseSimTime(True),
         simulation,
-        spawn_lynx_with_delay,
-        delay_send_manipulators_to_home_position
+        # spawn_lynx_with_delay,
+        # delay_send_manipulators_to_home_position
     ]
 
     return LaunchDescription(actions)

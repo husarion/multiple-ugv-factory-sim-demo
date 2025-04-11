@@ -1815,14 +1815,14 @@
       <pose>21.1496 4.99078 0 0 -0 0</pose>
     </model>
 
-        <model name='table_marble'>
+    <model name='table_marble'>
       <static>1</static>
       <pose>-0.952715 -1.0674 0.648 0 -0 0</pose>
       <link name='link'>
         <collision name='collision'>
           <geometry>
             <mesh>
-              <uri>model:///table_marble/meshes/table_lightmap.dae</uri>
+              <uri>model://table_marble/meshes/table_lightmap.dae</uri>
               <scale>0.25 0.25 0.25</scale>
             </mesh>
           </geometry>
@@ -1861,6 +1861,36 @@
         <kinematic>0</kinematic>
       </link>
     </model>
+
+    <model name="panther_toy1">
+      <include>
+        <uri>model://panther_toy</uri>
+      </include>
+      <pose>-2.0 -1.0 0.98 0 -0 0</pose>
+    </model>
+
+    <model name="panther_toy2">
+      <include>
+        <uri>model://panther_toy</uri>
+      </include>
+      <pose>-2.0 -1.15 0.98 0 -0 0</pose>
+    </model>
+
+    <model name="panther_toy3">
+      <include>
+        <uri>model://panther_toy</uri>
+      </include>
+      <pose>-2.0 -1.3 0.98 0 -0 0</pose>
+    </model>
+
+    <model name="panther_toy4">
+      <include>
+        <uri>model://panther_toy</uri>
+      </include>
+      <pose>-2.0 -1.45 0.98 0 -0 0</pose>
+    </model>
+
+
 
 
   </world>

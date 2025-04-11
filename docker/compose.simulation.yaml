@@ -20,7 +20,6 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
       - ../husarion_ugv_pick_and_place_demo/config:/config
-
     <<:
       - *common-config
       - *gpu-config

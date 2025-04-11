@@ -7,7 +7,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(husarion_ugv_gazebo REQUIRED)
+# find_package(husarion_ugv_gazebo REQUIRED)
 
 install(DIRECTORY launch config worlds models DESTINATION share/${PROJECT_NAME})
 
