@@ -31,10 +31,22 @@ from launch.actions import ExecuteProcess
 
 
 def generate_launch_description():
+    grasp_config = PathJoinSubstitution(
+        [
+            FindPackageShare("husarion_ugv_pick_and_place_demo"),
+            "config",
+            "grasp_service_config.yaml",
+        ]
+    )
+
     simulation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                [FindPackageShare("husarion_ugv_gazebo"), "launch", "simulation.launch.py"]
+                [
+                    FindPackageShare("husarion_ugv_gazebo"),
+                    "launch",
+                    "simulation.launch.py",
+                ]
             )
         ),
         launch_arguments={
@@ -49,24 +61,22 @@ def generate_launch_description():
                     "industrial-warehouse_with_outside.sdf",
                 ]
             ),
-            "gz_gui":
-                PathJoinSubstitution(
+            "gz_gui": PathJoinSubstitution(
                 [
                     FindPackageShare("husarion_ugv_pick_and_place_demo"),
                     "config",
                     "gzgui.config",
                 ]
             ),
-
             "components_config_path": PathJoinSubstitution(
                 [
                     FindPackageShare("husarion_ugv_pick_and_place_demo"),
                     "config",
                     "panther_components.yaml",
                 ]
-            ),
-            "x": "-6.2",
-            "y": "8.75",
+            ),  # panther
+            "x": "-6.2",  # panther
+            "y": "9.25",
             "yaw": "3.14",
         }.items(),
     )
@@ -85,7 +95,7 @@ def generate_launch_description():
             "namespace": "lynx",
             "robot_model": "lynx",
             "x": "-6.2",
-            "y": "9.75",
+            "y": "6.25",
             "yaw": "3.14",
             "wheel_type": "WH05",
             "wheel_config_path": PathJoinSubstitution(
@@ -101,7 +111,46 @@ def generate_launch_description():
         }.items(),
     )
 
-    spawn_lynx_with_delay = TimerAction(period=5.0, actions=[simulate_lynx])
+    connect_maps_tf = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="connect_maps_tf",
+        output="screen",
+        parameters=[{"use_sim_time": True}],
+        arguments=[
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "panther/map",
+            "lynx/map",
+        ],
+    )
+
+
+
+    laser_filter_config = PathJoinSubstitution(
+        [
+            FindPackageShare("husarion_ugv_pick_and_place_demo"),
+            "config",
+            "laser_filter.yaml",
+        ]
+    )
+    
+    laser_filter_node = Node(
+        package="laser_filters",
+        executable="scan_to_scan_filter_chain",
+        parameters=[
+            laser_filter_config,
+        ],
+        namespace="lynx",
+    )
+
+    spawn_lynx_with_delay = TimerAction(
+        period=15.0, actions=[simulate_lynx, connect_maps_tf, laser_filter_node]
+    )
 
     send_panther_manipulator_to_home_position = ExecuteProcess(
         cmd=[
@@ -111,54 +160,42 @@ def generate_launch_description():
             "/panther/panther_ur5e_joint_trajectory_controller/joint_trajectory",
             "trajectory_msgs/msg/JointTrajectory",
             "{"
-                "joint_names: ['ur5e_shoulder_pan_joint', 'ur5e_shoulder_lift_joint', 'ur5e_elbow_joint',"
-                    "'ur5e_wrist_1_joint', 'ur5e_wrist_2_joint', 'ur5e_wrist_3_joint'],"
-                "points: "
-                    "[{"
-                        "positions: [0.0, -3.4, 2.8, -1.57, 3.14, 0.0],"
-                        "time_from_start: {sec: 2, nanosec: 0}"
-                    "}]"
+            "joint_names: ['ur5e_shoulder_pan_joint', 'ur5e_shoulder_lift_joint', 'ur5e_elbow_joint',"
+            "'ur5e_wrist_1_joint', 'ur5e_wrist_2_joint', 'ur5e_wrist_3_joint'],"
+            "points: "
+            "[{"
+            "positions: [0.0, -3.4, 2.8, -1.57, 3.14, 0.0],"
+            "time_from_start: {sec: 2, nanosec: 0}"
+            "}]"
             "}",
-            "--once"
+            "--once",
         ],
         output="screen",
-        name="send_panther_manipulator_to_home_position"
+        name="send_panther_manipulator_to_home_position",
     )
 
-    send_lynx_manipulator_to_home_position = ExecuteProcess(
-        cmd=[
-            "ros2",
-            "topic",
-            "pub",
-            "/lynx/lynx_ur3e_joint_trajectory_controller/joint_trajectory",
-            "trajectory_msgs/msg/JointTrajectory",
-            "{"
-                "joint_names: ['ur3e_shoulder_pan_joint', 'ur3e_shoulder_lift_joint', 'ur3e_elbow_joint',"
-                    "'ur3e_wrist_1_joint', 'ur3e_wrist_2_joint', 'ur3e_wrist_3_joint'],"
-                "points: "
-                    "[{"
-                        "positions: [0.0, -3.4, 2.5, -1.57, 3.14, 0.0],"
-                        "time_from_start: {sec: 2, nanosec: 0}"
-                    "}]"
-            "}",
-            "--once"
-        ],
-        output="screen",
-        name="send_lynx_manipulator_to_home_position"
+    grasp_service_node = Node(
+        package="ros2_grasp_service",
+        executable="ros2_grasp_service",
+        parameters=[grasp_config, {"use_sim_time": True}],
+        emulate_tty=True,
+        namespace="panther",
     )
 
     delay_send_manipulators_to_home_position = TimerAction(
-        period
-        =10.0,
-        actions=[send_panther_manipulator_to_home_position, send_lynx_manipulator_to_home_position]
+        period=10.0,
+        actions=[
+            send_panther_manipulator_to_home_position,
+        ],
     )
 
     actions = [
         # Sets use_sim_time for all nodes started below (doesn't work for nodes started from ignition gazebo)
         SetUseSimTime(True),
         simulation,
-        # spawn_lynx_with_delay,
-        # delay_send_manipulators_to_home_position
+        grasp_service_node,
+        spawn_lynx_with_delay,
+        delay_send_manipulators_to_home_position,
     ]
 
     return LaunchDescription(actions)

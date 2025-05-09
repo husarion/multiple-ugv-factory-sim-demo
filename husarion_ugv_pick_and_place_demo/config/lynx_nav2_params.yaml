@@ -170,13 +170,13 @@ local_costmap:
       always_send_full_costmap: true
       rolling_window: true
 
-      footprint: '[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]'
+      footprint: '[[0.38, 0.33], [0.38, -0.33], [-0.38, -0.33], [-0.38, 0.33]]'
 
       plugins: [<obstacle_layer>, <voxel_layer>, inflation_layer]
       inflation_layer:
         plugin: nav2_costmap_2d::InflationLayer
         cost_scaling_factor: 1.3
-        inflation_radius: 1.0
+        inflation_radius: 0.8
       obstacle_layer:
         plugin: nav2_costmap_2d::ObstacleLayer
         footprint_clearing_enabled: true
@@ -231,13 +231,13 @@ global_costmap:
       always_send_full_costmap: true
       track_unknown_space: true # if false, treats unknown space as free space, else as unknown space
 
-      footprint: '[[0.45, 0.47], [0.45, -0.47], [-0.45, -0.47], [-0.45, 0.47]]'
+      footprint: '[[0.38, 0.33], [0.38, -0.33], [-0.38, -0.33], [-0.38, 0.33]]'
 
       plugins: [static_layer, <obstacle_layer>, <voxel_layer>, inflation_layer]
       inflation_layer:
         plugin: nav2_costmap_2d::InflationLayer
         cost_scaling_factor: 1.3
-        inflation_radius: 1.0
+        inflation_radius: 0.8
         inflate_around_unknown: false
         inflate_unknown: false
       obstacle_layer:
@@ -378,7 +378,7 @@ amcl:
     always_reset_initial_pose: true
     initial_pose:
       x: 0.0
-      y: -0.5
+      y: 2.5
       yaw: 0.0
 
     tf_broadcast: true

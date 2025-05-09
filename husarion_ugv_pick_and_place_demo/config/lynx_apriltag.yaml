@@ -16,6 +16,6 @@
       debug: false
 
     tag:
-      ids: [0, 1, 2]
-      frames: [main_apriltag_link, backup_apriltag_link, panther_toy_apriltag_link]
-      sizes: [0.12, 0.12, 0.12]
+      ids: [10]
+      frames: [lynx_main_apriltag_link]
+      sizes: [0.12]

@@ -20,6 +20,14 @@
             <size>0.0706667 0.0674167 0.0296667</size>
           </box>
         </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
       </collision>
       <visual name="visual">
         <pose>0 0 0 0 0 0</pose>
@@ -29,6 +37,7 @@
           </mesh>
         </geometry>
       </visual>
+      <kinematic>0</kinematic>
     </link>
   </model>
 </sdf>

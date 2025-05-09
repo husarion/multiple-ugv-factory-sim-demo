@@ -7,9 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 # find_package(husarion_ugv_gazebo REQUIRED)
 
-install(DIRECTORY launch config worlds models DESTINATION share/${PROJECT_NAME})
+
+ament_python_install_package(${PROJECT_NAME})
+
+
+install(DIRECTORY launch config worlds models urdf DESTINATION share/${PROJECT_NAME})
 
 ament_environment_hooks(
   "${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.sh.in")

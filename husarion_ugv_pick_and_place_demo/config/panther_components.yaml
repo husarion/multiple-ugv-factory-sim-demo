@@ -1,7 +1,7 @@
 components:
   # - type: DEV01
   # - type: DEV02
-  # - type: DEV04H
+  - type: DEV04H
 
   - type: LDR20
     parent_link: mount_link

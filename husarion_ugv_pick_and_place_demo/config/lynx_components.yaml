@@ -5,42 +5,15 @@ components:
     parent_link: mount_link
     xyz: 0.15 0.0 0.0
     rpy: 0.0 0.0 0.0
-  - type: MAN01
+
+  - type: WCH01
+    parent_link: cover_link
+    xyz: 0.33 0.0 -0.15
+    rpy: 0.0 0.0 0.0
+
+  - type: CAM06
+    name: camera
     parent_link: mount_link
-    xyz: 0.0 0.0 0.0
+    xyz: 0.15 0.0 0.09
     rpy: 0.0 0.0 0.0
-    device_namespace: ur3e
-
-  - type: GRP02
-    name: ur3e_gripper
-    parent_link: ur3e_tool0
-    xyz: 0.0 0.0 0.0
-    rpy: 0.0 0.0 0.0
-    device_namespace: ur3e
-
-# If you want to add for example LDR01, LDR06 and CAM01 to your Panther look at this example below:
-
-
-
-
-
-
-
-  # - type: DEV07T
-  #   parent_link: cover_link
-  #   xyz: 0.0 0.1 0.0
-  #   rpy: 0.0 0.0 0.0
-  #   device_namespace: main_lidar
-
-#   - type: LDR06
-#     parent_link: cover_link
-#     xyz: 0.0 -0.1 0.0
-#     rpy: 0.0 0.0 0.0
-#     device_namespace: second_lidar
-
-#   - type: CAM01
-#     name: camera
-#     parent_link: cover_link
-#     xyz: 0.1 0.0 0.0
-#     rpy: 0.0 0.0 0.0
-#     device_namespace: front_cam
+    device_namespace: zed

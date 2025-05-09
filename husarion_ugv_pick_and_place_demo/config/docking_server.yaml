@@ -19,27 +19,35 @@
       external_detection_timeout: 0.2
       docking_distance_threshold: 0.04
       docking_yaw_threshold: 0.2
-      staging_x_offset: -1.0
+      staging_x_offset: -0.8
       filter_coef: 0.1
       use_wibotic_info: False
       wibotic_info_timeout: 1.0
 
-    docks: ["main", "backup"]
+    docks: ["main", "panther_toy", "lynx_main"]
     main:
       type: charging_dock
       frame: <robot_namespace>/map
       dock_frame: main_wibotic_transmitter_link
-      pose: [0.1, 0.0, 0.0] # [x, y, yaw] of the dock on the map.
-      gazebo_spawn_pose: [-6.65, 8.75, 1.57] # [x, y, yaw] of the dock on the gazebo world.
+      pose: [0.1, -0.5, 0.0] # [x, y, yaw] of the dock on the map.
+      gazebo_spawn_pose: [-6.65, 9.25, 1.57] # [x, y, yaw] of the dock on the gazebo world.
       apriltag_id: 0
 
-    backup:
+    panther_toy:
       type: charging_dock
       frame: <robot_namespace>/map
-      dock_frame: backup_wibotic_transmitter_link
-      pose: [0.1, -1.0, 0.0] # [x, y, yaw] of the dock on the map.
-      gazebo_spawn_pose: [-6.65, 9.75, 1.57] # [x, y, yaw] of the dock on the gazebo world.
-      apriltag_id: 1
+      dock_frame: panther_toy_wibotic_transmitter_link
+      pose: [-3.6, 9.849997456664482, 3.14] # [x, y, yaw] of the dock on the map.
+      gazebo_spawn_pose: [-2.2, -1.0, -1.57] # [x, y, yaw] of the dock on the gazebo world.
+      apriltag_id: 2
+
+    lynx_main:
+      type: charging_dock
+      frame: <robot_namespace>/map
+      dock_frame: lynx_main_wibotic_transmitter_link
+      pose: [0.1, 2.5, 0.0] # [x, y, yaw] of the dock on the map.
+      gazebo_spawn_pose: [-6.65, 6.25, 1.57] # [x, y, yaw] of the dock on the gazebo world.
+      apriltag_id: 10
 
     controller:
       k_phi: 1.0
