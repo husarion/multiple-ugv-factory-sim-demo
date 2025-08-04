@@ -108,6 +108,13 @@ def generate_launch_description():
                     "lynx_components.yaml",
                 ]
             ),
+            "controller_config_path": PathJoinSubstitution(
+                [
+                    FindPackageShare("husarion_ugv_controller"),
+                    "config",
+                    "WH05_controller.yaml",
+                ]
+            ),
         }.items(),
     )
 
@@ -138,7 +145,7 @@ def generate_launch_description():
             "laser_filter.yaml",
         ]
     )
-    
+
     laser_filter_node = Node(
         package="laser_filters",
         executable="scan_to_scan_filter_chain",
