@@ -1858,12 +1858,5 @@
       </link>
     </model>
 
-    <model name="panther_toy1">
-      <include>
-        <uri>model://panther_toy</uri>
-      </include>
-      <pose>-1.7 -0.84 0.98 1.57 -0 0</pose>
-    </model>
-
   </world>
 </sdf>

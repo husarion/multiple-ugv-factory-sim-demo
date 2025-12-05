@@ -9,7 +9,7 @@ x-common-config: &common-config
     - CYCLONEDDS_URI=file:///config/cyclonedds.xml
 
 x-gpu-config: &gpu-config
-  # runtime: nvidia
+  runtime: nvidia
   env_file: .env.gpu
 
 services:

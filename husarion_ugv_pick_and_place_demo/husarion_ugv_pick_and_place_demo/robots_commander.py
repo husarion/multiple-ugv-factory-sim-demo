@@ -1,3 +1,4 @@
+import time
 from geometry_msgs.msg import PoseStamped
 from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 import rclpy
@@ -6,6 +7,8 @@ from std_srvs.srv import Empty, Trigger
 from opennav_docking_msgs.action import UndockRobot, DockRobot
 from rclpy.action import ActionClient
 import math
+from copy import copy
+import panther_toy_wrapper
 
 
 def quaternion_from_euler(roll, pitch, yaw):
@@ -49,7 +52,7 @@ def create_station_pose_lynx():
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = "lynx/map"
     goal_pose.pose.position.x = -3.5
-    goal_pose.pose.position.y = 8.8
+    goal_pose.pose.position.y = 8.92
     goal_pose.pose.position.z = 0.0
 
     qx, qy, qz, qw = quaternion_from_euler(0.0, 0.0, 1.57)
@@ -61,6 +64,19 @@ def create_station_pose_lynx():
 
     return goal_pose
 
+def create_pickup_pose():
+    goal_pose = PoseStamped()
+    goal_pose.header.frame_id = "panther/map"
+    goal_pose.pose.position.x = -19.5
+    goal_pose.pose.position.y = 11.0
+    goal_pose.pose.position.z = 0.0
+    qx, qy, qz, qw = quaternion_from_euler(0.0, 0.0, -3.14)
+
+    goal_pose.pose.orientation.x = qx
+    goal_pose.pose.orientation.y = qy
+    goal_pose.pose.orientation.z = qz
+    goal_pose.pose.orientation.w = qw
+    return goal_pose
 
 def pick_and_place(nav):
     pick_service = nav.create_client(Empty, "/panther/pick")
@@ -112,7 +128,7 @@ def reset_estop(nav):
         nav.get_logger().error("E-stop reset failed.")
 
 
-def undock_robot(nav, dock_type=None, max_undocking_time=30.0):
+def undock_robot(nav, dock_type=None, max_undocking_time=30.0, wait=True):
     """
     Sends an undocking goal to the navigation system.
 
@@ -145,6 +161,9 @@ def undock_robot(nav, dock_type=None, max_undocking_time=30.0):
         nav.get_logger().warn("Undock goal was rejected")
         return False
 
+    if not wait:
+        return True
+    
     result_future = goal_handle.get_result_async()
     rclpy.spin_until_future_complete(nav, result_future)
     result = result_future.result().result
@@ -159,7 +178,7 @@ def undock_robot(nav, dock_type=None, max_undocking_time=30.0):
         return False
 
 
-def dock_robot(nav, dock_name=None, max_docking_time=30.0):
+def dock_robot(nav, dock_name=None, max_docking_time=30.0, wait=True):
     """
     Sends a docking goal to the navigation system.
 
@@ -194,8 +213,12 @@ def dock_robot(nav, dock_name=None, max_docking_time=30.0):
         nav.get_logger().warn("Dock goal was rejected")
         return False
 
+    if not wait:
+        return True
+
     result_future = goal_handle.get_result_async()
     rclpy.spin_until_future_complete(nav, result_future)
+
     result = result_future.result().result
 
     if result.success:
@@ -208,9 +231,12 @@ def dock_robot(nav, dock_name=None, max_docking_time=30.0):
         return False
 
 
-def navigate_with_timeout(nav, goal_pose, timeout=600):
+def navigate(nav, goal_pose, timeout=600, wait=True):
     nav.goToPose(goal_pose)
-
+    
+    if not wait:
+        return
+    
     while not nav.isTaskComplete():
         feedback = nav.getFeedback()
         if (
@@ -246,16 +272,26 @@ def main():
     reset_estop(lynx)
 
     lynx_station_pose = create_station_pose_lynx()
+    lynx_undock_station_pose = create_station_pose_lynx()
+    lynx_undock_station_pose.pose.position.y -= 0.6
+    lynx_pickup_pose = create_pickup_pose()
 
     while True:
-        undock_robot(panther)
-        undock_robot(lynx)
-        dock_robot(panther, dock_name="panther_toy", max_docking_time=30.0)
-        navigate_with_timeout(lynx, lynx_station_pose, timeout=600)
+        undock_robot(panther,max_undocking_time=40.0, wait=False)
+        undock_robot(lynx, max_undocking_time=40.0, wait=True)
+        panther_toy_wrapper.create_panther_toy()
+        dock_robot(panther, dock_name="panther_toy", max_docking_time=30.0, wait=False)
+        time.sleep(25.0)  # Give some time for the panther to dock before navigating lynx
+        navigate(lynx, lynx_undock_station_pose, timeout=600)
+        navigate(lynx, lynx_station_pose, timeout=600)
         pick_and_place(panther)
-        dock_robot(lynx, "lynx_main")
+
+        navigate(lynx, lynx_undock_station_pose, timeout=600, wait=False)
         undock_robot(panther)
-        dock_robot(panther, dock_name="main", max_docking_time=30.0)
+        dock_robot(panther, dock_name="main", max_docking_time=30.0, wait=False)
+        navigate(lynx, lynx_pickup_pose, timeout=600)
+        panther_toy_wrapper.remove_panther_toy()
+        dock_robot(lynx, "lynx_main", max_docking_time=60.0)
 
     rclpy.shutdown()
 

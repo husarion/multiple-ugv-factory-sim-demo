@@ -156,7 +156,7 @@ def generate_launch_description():
     )
 
     spawn_lynx_with_delay = TimerAction(
-        period=15.0, actions=[simulate_lynx, connect_maps_tf, laser_filter_node]
+        period=20.0, actions=[simulate_lynx, connect_maps_tf, laser_filter_node]
     )
 
     send_panther_manipulator_to_home_position = ExecuteProcess(
@@ -175,7 +175,7 @@ def generate_launch_description():
             "time_from_start: {sec: 2, nanosec: 0}"
             "}]"
             "}",
-            "--once",
+            "-t 10",
         ],
         output="screen",
         name="send_panther_manipulator_to_home_position",
@@ -190,7 +190,7 @@ def generate_launch_description():
     )
 
     delay_send_manipulators_to_home_position = TimerAction(
-        period=10.0,
+        period=18.0,
         actions=[
             send_panther_manipulator_to_home_position,
         ],

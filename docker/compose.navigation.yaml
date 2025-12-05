@@ -26,7 +26,7 @@ services:
         docking_server_config_path:=/config/docking_server.yaml
         apriltag_config_path:=/config/panther_apriltag.yaml
         apriltag_size:=0.12
-        use_sim:=True
+        use_sim_time:=True
 
   panther-navigation:
     image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
@@ -42,13 +42,11 @@ services:
     command: >
       ros2 launch husarion_ugv_navigation bringup_launch.py
         namespace:=panther
-        observation_topic:=/panther/velodyne_points
-        observation_topic_type:=pointcloud
+        observation_topic:=/panther/scan
+        observation_topic_type:=laserscan
         params_file:=/ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/config/panther_nav2_params.yaml
         slam:=False
         use_sim_time:=True
-        use_sim:=True
-
 
   lynx-navigation:
     image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
@@ -69,8 +67,6 @@ services:
         params_file:=/ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/config/lynx_nav2_params.yaml
         slam:=False
         use_sim_time:=True
-        use_sim:=True
-
 
   lynx-docking:
     image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
