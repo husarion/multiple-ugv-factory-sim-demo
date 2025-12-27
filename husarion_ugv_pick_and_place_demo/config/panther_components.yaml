@@ -1,0 +1,35 @@
+components:
+  # - type: DEV01
+  # - type: DEV02
+  - type: DEV04H
+
+  - type: LDR06
+    parent_link: mount_link
+    xyz: 0.14 -0.18 0.37
+    rpy: 0.0 0.0 0.0
+
+  - type: WCH01
+    parent_link: lights_channel_1_link
+    xyz: -0.02 0.0 -0.0185
+    rpy: 0.0 0.0 0.0
+
+  - type: CAM06
+    name: camera
+    parent_link: mount_link
+    xyz: 0.22 0.0 0.08
+    rpy: 0.0 0.0 0.0
+    device_namespace: zed
+
+  - type: MAN02
+    name: ur5e
+    parent_link: mount_link
+    xyz: 0.1 0.0 0.37
+    rpy: 0.0 0.0 0.0
+    device_namespace: ur5e
+
+  - type: GRP02
+    name: ur5e_gripper
+    parent_link: ur5e_tool0
+    xyz: 0.0 0.0 0.0
+    rpy: 0.0 0.0 0.0
+    device_namespace: ur5e

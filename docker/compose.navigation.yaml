@@ -1,0 +1,93 @@
+x-common-config:
+  &common-config
+  network_mode: host
+  ipc: host
+
+services:
+  panther-docking:
+    image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
+    container_name: panther-docking
+    <<: *common-config
+    volumes:
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+      - ../husarion_ugv_pick_and_place_demo/config:/config
+      - ../husarion_ugv_pick_and_place_demo/config/apriltags:/config/apriltags
+      - ./spawn_charging_docks.launch.py:/ros2_ws/src/husarion_ugv_autonomy_ros/husarion_ugv_docking/launch/spawn_charging_docks.launch.py
+
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///config/cyclonedds.xml
+    command: >
+      ros2 launch husarion_ugv_docking docking.launch.py
+        namespace:=panther
+        use_wibotic_info:=False
+        camera_image_topic:=/panther/zed/zed_node/rgb/image_rect_color
+        camera_info_topic:=/panther/zed/zed_node/rgb/camera_info
+        docking_server_config_path:=/config/docking_server.yaml
+        apriltag_config_path:=/config/panther_apriltag.yaml
+        apriltag_size:=0.12
+        use_sim_time:=True
+
+  panther-navigation:
+    image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
+    container_name: panther-navigation
+    <<: *common-config
+    volumes:
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+      - ../maps:/maps
+      - ../husarion_ugv_pick_and_place_demo/config:/config
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///config/cyclonedds.xml
+    command: >
+      ros2 launch husarion_ugv_navigation bringup_launch.py
+        namespace:=panther
+        observation_topic:=/panther/scan
+        observation_topic_type:=laserscan
+        params_file:=/ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/config/panther_nav2_params.yaml
+        slam:=False
+        use_sim_time:=True
+
+  lynx-navigation:
+    image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
+    container_name: lynx-navigation
+    <<: *common-config
+    volumes:
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+      - ../maps:/maps
+      - ../husarion_ugv_pick_and_place_demo/config:/config
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///config/cyclonedds.xml
+    command: >
+      ros2 launch husarion_ugv_navigation bringup_launch.py
+        namespace:=lynx
+        observation_topic:=/lynx/scan_filtered
+        observation_topic_type:=laserscan
+        params_file:=/ros2_ws/src/husarion_ugv_pick_and_place_demo/husarion_ugv_pick_and_place_demo/config/lynx_nav2_params.yaml
+        slam:=False
+        use_sim_time:=True
+
+  lynx-docking:
+    image: husarion/husarion-ugv-autonomy:humble-0.1.0-20250210-stable
+    container_name: lynx-docking
+    <<: *common-config
+    volumes:
+      - ..:/ros2_ws/src/husarion_ugv_pick_and_place_demo/
+      - ../husarion_ugv_pick_and_place_demo/config:/config
+      - ../husarion_ugv_pick_and_place_demo/config/apriltags:/config/apriltags
+      - ./spawn_charging_docks.launch.py:/ros2_ws/src/husarion_ugv_autonomy_ros/husarion_ugv_docking/launch/spawn_charging_docks.launch.py
+
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///config/cyclonedds.xml
+    command: >
+      ros2 launch husarion_ugv_docking docking.launch.py
+        namespace:=lynx
+        use_wibotic_info:=False
+        camera_image_topic:=/lynx/zed/zed_node/rgb/image_rect_color
+        camera_info_topic:=/lynx/zed/zed_node/rgb/camera_info
+        docking_server_config_path:=/config/docking_server.yaml
+        apriltag_config_path:=/config/lynx_apriltag.yaml
+        apriltag_size:=0.12
+        use_sim:=True

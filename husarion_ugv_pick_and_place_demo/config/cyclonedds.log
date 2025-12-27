@@ -1,0 +1,141 @@
+1746560703.171602 [0]    spawner: config: Domain/General/MulticastRecvNetworkInterfaceAddresses/#text: preferred {}
+1746560703.171630 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@autodetermine]: false {}
+1746560703.171637 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@name]: lo {}
+1746560703.171644 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@address]: (null) {}
+1746560703.171650 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@priority]: default {}
+1746560703.171654 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@prefer_multicast]: false {}
+1746560703.171660 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@presence_required]: true {}
+1746560703.171665 [0]    spawner: config: Domain/General/Interfaces/NetworkInterface[@multicast]: default {}
+1746560703.171670 [0]    spawner: config: Domain/General/ExternalNetworkAddress/#text: auto {}
+1746560703.171675 [0]    spawner: config: Domain/General/ExternalNetworkMask/#text: 0.0.0.0 {}
+1746560703.171680 [0]    spawner: config: Domain/General/AllowMulticast/#text: false {0}
+1746560703.171684 [0]    spawner: config: Domain/General/MulticastTimeToLive/#text: 32 {}
+1746560703.171689 [0]    spawner: config: Domain/General/DontRoute/#text: false {}
+1746560703.171695 [0]    spawner: config: Domain/General/Transport/#text: udp {}
+1746560703.171701 [0]    spawner: config: Domain/General/EnableMulticastLoopback/#text: true {}
+1746560703.171709 [0]    spawner: config: Domain/General/MaxMessageSize/#text: 14720 B {}
+1746560703.171715 [0]    spawner: config: Domain/General/MaxRexmitMessageSize/#text: 1456 B {}
+1746560703.171721 [0]    spawner: config: Domain/General/FragmentSize/#text: 1344 B {}
+1746560703.171726 [0]    spawner: config: Domain/General/RedundantNetworking/#text: false {}
+1746560703.171731 [0]    spawner: config: Domain/General/EntityAutoNaming/#text: empty {}
+1746560703.171739 [0]    spawner: config: Domain/General/EntityAutoNaming[@seed]: 2444281279 1972171063 269674884 1465983687 2717737922 1112804964 4102052200 3925917319 {}
+1746560703.171748 [0]    spawner: config: Domain/Sizing/ReceiveBufferSize/#text: 1 MiB {}
+1746560703.171755 [0]    spawner: config: Domain/Sizing/ReceiveBufferChunkSize/#text: 128 KiB {}
+1746560703.171759 [0]    spawner: config: Domain/Compatibility/StandardsConformance/#text: lax {}
+1746560703.171764 [0]    spawner: config: Domain/Compatibility/ExplicitlyPublishQosSetToDefault/#text: false {}
+1746560703.171768 [0]    spawner: config: Domain/Compatibility/ManySocketsMode/#text: single {}
+1746560703.171773 [0]    spawner: config: Domain/Compatibility/AssumeRtiHasPmdEndpoints/#text: false {}
+1746560703.171778 [0]    spawner: config: Domain/Discovery/Tag/#text:  {}
+1746560703.171784 [0]    spawner: config: Domain/Discovery/ExternalDomainId/#text: 0 {}
+1746560703.171789 [0]    spawner: config: Domain/Discovery/DSGracePeriod/#text: 30 s {}
+1746560703.171796 [0]    spawner: config: Domain/Discovery/Peers/Peer[@Address]: 127.0.0.1 {0}
+1746560703.171803 [0]    spawner: config: Domain/Discovery/ParticipantIndex/#text: none {}
+1746560703.171810 [0]    spawner: config: Domain/Discovery/MaxAutoParticipantIndex/#text: 9 {}
+1746560703.171816 [0]    spawner: config: Domain/Discovery/SPDPMulticastAddress/#text: 239.255.0.1 {}
+1746560703.171823 [0]    spawner: config: Domain/Discovery/SPDPInterval/#text: 30 s {}
+1746560703.171828 [0]    spawner: config: Domain/Discovery/DefaultMulticastAddress/#text: auto {}
+1746560703.171836 [0]    spawner: config: Domain/Discovery/Ports/Base/#text: 7400 {}
+1746560703.171842 [0]    spawner: config: Domain/Discovery/Ports/DomainGain/#text: 250 {}
+1746560703.171849 [0]    spawner: config: Domain/Discovery/Ports/ParticipantGain/#text: 2 {}
+1746560703.171855 [0]    spawner: config: Domain/Discovery/Ports/MulticastMetaOffset/#text: 0 {}
+1746560703.171861 [0]    spawner: config: Domain/Discovery/Ports/UnicastMetaOffset/#text: 10 {}
+1746560703.171867 [0]    spawner: config: Domain/Discovery/Ports/MulticastDataOffset/#text: 1 {}
+1746560703.171884 [0]    spawner: config: Domain/Discovery/Ports/UnicastDataOffset/#text: 11 {}
+1746560703.171892 [0]    spawner: config: Domain/Discovery/EnableTopicDiscoveryEndpoints/#text: false {}
+1746560703.171899 [0]    spawner: config: Domain/Discovery/LeaseDuration/#text: 10 s {}
+1746560703.171912 [0]    spawner: config: Domain/Tracing/Category/#text: fatal,error,warning,info,config {0}
+1746560703.171918 [0]    spawner: config: Domain/Tracing/OutputFile/#text: /config/cyclonedds.log {0}
+1746560703.171923 [0]    spawner: config: Domain/Tracing/AppendToFile/#text: false {}
+1746560703.171927 [0]    spawner: config: Domain/Tracing/PacketCaptureFile/#text:  {}
+1746560703.171932 [0]    spawner: config: Domain/Internal/DeliveryQueueMaxSamples/#text: 256 {}
+1746560703.171937 [0]    spawner: config: Domain/Internal/PrimaryReorderMaxSamples/#text: 128 {}
+1746560703.171942 [0]    spawner: config: Domain/Internal/SecondaryReorderMaxSamples/#text: 128 {}
+1746560703.171947 [0]    spawner: config: Domain/Internal/DefragUnreliableMaxSamples/#text: 4 {}
+1746560703.171952 [0]    spawner: config: Domain/Internal/DefragReliableMaxSamples/#text: 16 {}
+1746560703.171956 [0]    spawner: config: Domain/Internal/BuiltinEndpointSet/#text: writers {}
+1746560703.171961 [0]    spawner: config: Domain/Internal/MeasureHbToAckLatency/#text: false {}
+1746560703.171965 [0]    spawner: config: Domain/Internal/UnicastResponseToSPDPMessages/#text: true {}
+1746560703.171970 [0]    spawner: config: Domain/Internal/SynchronousDeliveryPriorityThreshold/#text: 0 {}
+1746560703.171974 [0]    spawner: config: Domain/Internal/SynchronousDeliveryLatencyBound/#text: inf {}
+1746560703.171979 [0]    spawner: config: Domain/Internal/MaxParticipants/#text: 0 {}
+1746560703.171984 [0]    spawner: config: Domain/Internal/AccelerateRexmitBlockSize/#text: 0 {}
+1746560703.171989 [0]    spawner: config: Domain/Internal/RetransmitMerging/#text: never {}
+1746560703.171993 [0]    spawner: config: Domain/Internal/RetransmitMergingPeriod/#text: 5 ms {}
+1746560703.171997 [0]    spawner: config: Domain/Internal/HeartbeatInterval/#text: 100 ms {}
+1746560703.172002 [0]    spawner: config: Domain/Internal/HeartbeatInterval[@min]: 5 ms {}
+1746560703.172006 [0]    spawner: config: Domain/Internal/HeartbeatInterval[@minsched]: 20 ms {}
+1746560703.172011 [0]    spawner: config: Domain/Internal/HeartbeatInterval[@max]: 8 s {}
+1746560703.172016 [0]    spawner: config: Domain/Internal/MaxQueuedRexmitBytes/#text: 512 KiB {}
+1746560703.172021 [0]    spawner: config: Domain/Internal/MaxQueuedRexmitMessages/#text: 200 {}
+1746560703.172026 [0]    spawner: config: Domain/Internal/WriterLingerDuration/#text: 1 s {}
+1746560703.172031 [0]    spawner: config: Domain/Internal/SocketReceiveBufferSize[@min]: 10 MiB {0}
+1746560703.172036 [0]    spawner: config: Domain/Internal/SocketReceiveBufferSize[@max]: default {}
+1746560703.172040 [0]    spawner: config: Domain/Internal/SocketSendBufferSize[@min]: 64 KiB {}
+1746560703.172045 [0]    spawner: config: Domain/Internal/SocketSendBufferSize[@max]: default {}
+1746560703.172049 [0]    spawner: config: Domain/Internal/NackDelay/#text: 100 ms {}
+1746560703.172053 [0]    spawner: config: Domain/Internal/AckDelay/#text: 10 ms {}
+1746560703.172057 [0]    spawner: config: Domain/Internal/AutoReschedNackDelay/#text: 3 s {}
+1746560703.172062 [0]    spawner: config: Domain/Internal/PreEmptiveAckDelay/#text: 10 ms {}
+1746560703.172067 [0]    spawner: config: Domain/Internal/ScheduleTimeRounding/#text: 0 s {}
+1746560703.172072 [0]    spawner: config: Domain/Internal/DDSI2DirectMaxThreads/#text: 1 {}
+1746560703.172076 [0]    spawner: config: Domain/Internal/SquashParticipants/#text: false {}
+1746560703.172081 [0]    spawner: config: Domain/Internal/SPDPResponseMaxDelay/#text: 0 s {}
+1746560703.172085 [0]    spawner: config: Domain/Internal/LateAckMode/#text: false {}
+1746560703.172090 [0]    spawner: config: Domain/Internal/RetryOnRejectBestEffort/#text: false {}
+1746560703.172095 [0]    spawner: config: Domain/Internal/GenerateKeyhash/#text: false {}
+1746560703.172100 [0]    spawner: config: Domain/Internal/MaxSampleSize/#text: 2147483647 B {}
+1746560703.172110 [0]    spawner: config: Domain/Internal/LivelinessMonitoring/#text: false {}
+1746560703.172114 [0]    spawner: config: Domain/Internal/LivelinessMonitoring[@StackTraces]: true {}
+1746560703.172118 [0]    spawner: config: Domain/Internal/LivelinessMonitoring[@Interval]: 1 s {}
+1746560703.172123 [0]    spawner: config: Domain/Internal/MonitorPort/#text: -1 {}
+1746560703.172128 [0]    spawner: config: Domain/Internal/PrioritizeRetransmit/#text: true {}
+1746560703.172132 [0]    spawner: config: Domain/Internal/UseMulticastIfMreqn/#text: 0 {}
+1746560703.172136 [0]    spawner: config: Domain/Internal/RediscoveryBlacklistDuration/#text: 0 s {}
+1746560703.172141 [0]    spawner: config: Domain/Internal/RediscoveryBlacklistDuration[@enforce]: false {}
+1746560703.172145 [0]    spawner: config: Domain/Internal/MultipleReceiveThreads/#text: default {}
+1746560703.172149 [0]    spawner: config: Domain/Internal/MultipleReceiveThreads[@maxretries]: 4294967295 {}
+1746560703.172154 [0]    spawner: config: Domain/Internal/Test/XmitLossiness/#text: 0 {}
+1746560703.172159 [0]    spawner: config: Domain/Internal/Watermarks/WhcLow/#text: 1 KiB {}
+1746560703.172164 [0]    spawner: config: Domain/Internal/Watermarks/WhcHigh/#text: 500 KiB {}
+1746560703.172169 [0]    spawner: config: Domain/Internal/Watermarks/WhcHighInit/#text: 30 KiB {}
+1746560703.172174 [0]    spawner: config: Domain/Internal/Watermarks/WhcAdaptive/#text: true {}
+1746560703.172179 [0]    spawner: config: Domain/Internal/BurstSize/MaxRexmit/#text: 1 MiB {}
+1746560703.172183 [0]    spawner: config: Domain/Internal/BurstSize/MaxInitTransmit/#text: 4294967295 {}
+1746560703.172188 [0]    spawner: config: Domain/Internal/EnableExpensiveChecks/#text:  {}
+1746560703.172193 [0]    spawner: config: Domain/TCP/NoDelay/#text: true {}
+1746560703.172197 [0]    spawner: config: Domain/TCP/Port/#text: -1 {}
+1746560703.172202 [0]    spawner: config: Domain/TCP/ReadTimeout/#text: 2 s {}
+1746560703.172206 [0]    spawner: config: Domain/TCP/WriteTimeout/#text: 2 s {}
+1746560703.172212 [0]    spawner: config: Domain/TCP/AlwaysUsePeeraddrForUnicast/#text: false {}
+1746560703.172219 [0]    spawner: config: Domain/SSL/Enable/#text: false {}
+1746560703.172226 [0]    spawner: config: Domain/SSL/CertificateVerification/#text: true {}
+1746560703.172230 [0]    spawner: config: Domain/SSL/VerifyClient/#text: true {}
+1746560703.172236 [0]    spawner: config: Domain/SSL/SelfSignedCertificates/#text: false {}
+1746560703.172253 [0]    spawner: config: Domain/SSL/KeystoreFile/#text: keystore {}
+1746560703.172258 [0]    spawner: config: Domain/SSL/KeyPassphrase/#text: secret {}
+1746560703.172263 [0]    spawner: config: Domain/SSL/Ciphers/#text: ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH {}
+1746560703.172270 [0]    spawner: config: Domain/SSL/EntropyFile/#text:  {}
+1746560703.172277 [0]    spawner: config: Domain/SSL/MinimumTLSVersion/#text: 1.3 {}
+1746560703.172284 [0]    spawner: config: Domain/SharedMemory/Enable/#text: false {}
+1746560703.172290 [0]    spawner: config: Domain/SharedMemory/Locator/#text:  {}
+1746560703.172297 [0]    spawner: config: Domain/SharedMemory/Prefix/#text: DDS_CYCLONE {}
+1746560703.172303 [0]    spawner: config: Domain/SharedMemory/LogLevel/#text: info {}
+1746560703.172311 [0]    spawner: config: Domain[@Id]: 0 {0}
+1746560703.172340 [0]    spawner: started at 1746560703.06172321 -- 2025-05-06 19:45:03+00:00
+1746560703.172346 [0]    spawner: udp initialized
+1746560703.172651 [0]    spawner: interfaces: lo udp/127.0.0.1(q1) eno1 udp/192.168.0.10(q9) docker0 udp/172.17.0.1(q9)
+1746560703.172661 [0]    spawner: selected interfaces: lo (index 1 priority 2)
+1746560703.172677 [0]    spawner: ownip: udp/127.0.0.1
+1746560703.172681 [0]    spawner: extmask: invalid/0 (not applicable)
+1746560703.172686 [0]    spawner: SPDP MC: udp/239.255.0.1
+1746560703.172690 [0]    spawner: default MC: udp/239.255.0.1
+1746560703.172694 [0]    spawner: SSM support included
+1746560703.172808 [0]    spawner: socket receive buffer size set to 20971520 bytes
+1746560703.172827 [0]    spawner: rtps_init: uc ports: disc 0 data 0
+1746560703.172831 [0]    spawner: rtps_init: domainid 0 participantid -2
+1746560703.172835 [0]    spawner: Unicast Ports: discovery 54536 data 54536
+1746560703.172846 [0]    spawner: socket receive buffer size set to 20971520 bytes
+1746560703.172855 [0]    spawner: interface lo: transmit port 36743
+1746560703.172875 [0]    spawner: add_peer_addresses: add udp/127.0.0.1:7410, :7412, :7414, :7416, :7418, :7420, :7422, :7424, :7426
+1746560772.985055 [0]      rviz2: udp finalized
+1746560772.985185 [0]      rviz2: Finis.

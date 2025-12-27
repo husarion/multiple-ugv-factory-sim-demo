@@ -1,0 +1,19 @@
+# By default Husarion UGV is loaded without any components.
+
+components:
+  - type: LDR06
+    parent_link: mount_link
+    xyz: -0.2 0.0 0.20
+    rpy: 0.0 0.0 0.0
+
+  - type: WCH01
+    parent_link: cover_link
+    xyz: 0.33 0.0 -0.15
+    rpy: 0.0 0.0 0.0
+
+  - type: CAM06
+    name: camera
+    parent_link: mount_link
+    xyz: 0.15 0.0 0.09
+    rpy: 0.0 0.0 0.0
+    device_namespace: zed
